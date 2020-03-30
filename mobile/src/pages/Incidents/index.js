@@ -31,15 +31,22 @@ export default function Incidents() {
     }
 
     setLoading(true);
+    
+    try {
+      const response = await api.get('incidents', {
+        params: { page }
+      });
+  
+      setIncidents([...incidents, ...response.data]);
+      setTotal(response.headers['x-total-count']);
+      setPage(page + 1);
+      setLoading(false);
 
-    const response = await api.get('incidents', {
-      params: { page }
-    });
+    }catch (error) {
+      console.log(error);
+    }
 
-    setIncidents([...incidents, ...response.data]);
-    setTotal(response.headers['x-total-count']);
-    setPage(page + 1);
-    setLoading(false);
+    
   }
 
   useEffect(() => {
