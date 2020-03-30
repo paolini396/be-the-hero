@@ -45,5 +45,7 @@ routes.delete('/incidents/:id', celebrate({
 }), IncidentController.delete); //route para delear um indicente ( um caso da ONG).
 
 
+routes.delete('/ongs/:id', OngController.delete);
+
 module.exports = routes;
 
